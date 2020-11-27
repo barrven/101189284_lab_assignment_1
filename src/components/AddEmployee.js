@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import EmployeeDataConnector from "../backend/EmployeeDataConnector";
 
 class AddEmployee extends Component{
     constructor(props){
@@ -33,7 +34,12 @@ class AddEmployee extends Component{
                 lastName: this.state.lastName,
                 emailId: this.state.emailId
             };
-            console.log(JSON.stringify(employee))
+
+            EmployeeDataConnector.addEmployee(employee)
+                .then(res =>{
+                    this.props.history.push("/")
+                })
+                .catch(e => console.error(e))
         };
 
         this.cancel = () =>{

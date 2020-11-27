@@ -1,11 +1,15 @@
 import axios from "axios"
 
-const EMPLOYEE_LIST_URL = "http://localhost:9090/api/v1/employees";
+const BASE_EMP_URL = "http://localhost:9090/api/v1/employees";
 
 class EmployeeDataConnector {
 
     getEmployees = () =>{
-        return axios.get(EMPLOYEE_LIST_URL);
+        return axios.get(BASE_EMP_URL)
+    };
+
+    addEmployee = (employee) =>{
+        return axios.post(BASE_EMP_URL, employee)
     }
 }
 
