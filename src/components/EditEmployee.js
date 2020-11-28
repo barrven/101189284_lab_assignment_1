@@ -1,11 +1,12 @@
 import React, { Component } from "react"
 import EmployeeDataConnector from "../backend/EmployeeDataConnector";
 
-class AddEmployee extends Component{
+class EditEmployee extends Component{
     constructor(props){
         super(props);
 
         this.state= {
+            id: props.match.params.id,
             firstName: "",
             lastName: "",
             emailId: ""
@@ -31,7 +32,7 @@ class AddEmployee extends Component{
                 emailId: this.state.emailId
             };
 
-            EmployeeDataConnector.addEmployee(employee)
+            EmployeeDataConnector.updateEmployeeById(this.state.id, employee)
                 .then(res =>{
                     this.props.history.push("/")
                 })
@@ -39,8 +40,21 @@ class AddEmployee extends Component{
         };
 
         this.cancel = () =>{
-              this.props.history.push("/")
+            this.props.history.push("/");
+            //this.props.history.goBack()
         }
+    }
+
+    componentDidMount() {
+        EmployeeDataConnector.getEmployeeById(this.state.id)
+            .then(res => {
+                this.setState({
+                    firstName: res.data.firstName,
+                    lastName: res.data.lastName,
+                    emailId: res.data.emailId
+                })
+            })
+            .catch(e => console.error(e))
     }
 
     render() {
@@ -48,13 +62,13 @@ class AddEmployee extends Component{
             <div className="container">
                 <div className="row">
                     <div className="card col-md-6 offset-md-3 offset-md-3">
-                        <h3 className="text-center">Add Employee</h3>
+                        <h3 className="text-center">Edit Employee</h3>
                         <div className="card-body">
                             <form>
                                 <div className="form-group">
                                     <label>First Name</label>
                                     <input placeholder="First Name" name="firstName" className="form-control"
-                                        value={this.state.firstName} onChange={this.firstNameChanged}
+                                           value={this.state.firstName} onChange={this.firstNameChanged}
                                     />
                                 </div>
 
@@ -74,7 +88,7 @@ class AddEmployee extends Component{
 
                                 <div className="text-center mt-4">
                                     <button className="btn btn-success m-2 btn-block" onClick={this.submitForm}>Save</button>
-                                    <button className="btn btn-danger m-2 btn-block" onClick={this.cancel.bind(this)}>Cancel</button>
+                                    <button className="btn btn-danger m-2 btn-block" onClick={this.cancel}>Cancel</button>
                                 </div>
                             </form>
                         </div>
@@ -85,4 +99,4 @@ class AddEmployee extends Component{
     }
 }
 
-export default AddEmployee
+export default EditEmployee
