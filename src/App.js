@@ -6,10 +6,12 @@ import { BrowserRouter, Route, Switch} from 'react-router-dom'
 import AddEmployee from "./components/AddEmployee";
 import EditEmployee from "./components/EditEmployee";
 import ViewEmployee from "./components/ViewEmployee"
+import Header from "./components/Header";
 
 function App() {
   return (
       <BrowserRouter>
+          <Header/>
           <div className="container pt-3">
               <Switch>
                   <Route path="/" exact component={ EmployeeList } />

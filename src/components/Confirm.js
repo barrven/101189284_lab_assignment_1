@@ -21,7 +21,7 @@ export default class ConfirmModal extends Component {
                         <Button variant="secondary" onClick={this.props.onHide}>
                             Cancel
                         </Button>
-                        <Button variant="primary" onClick={this.props.delete}>
+                        <Button variant="danger" onClick={this.props.delete}>
                             Delete
                         </Button>
                     </Modal.Footer>

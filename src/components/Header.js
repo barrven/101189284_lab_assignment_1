@@ -1,19 +1,14 @@
-import React, { Component } from "react"
+import React, {Component } from "react";
 
-class Header extends Component{
-    constructor(props){
-        super(props);
-
-        this.state= {
-
-        }
-    }
+export default class Header extends Component {
 
     render() {
         return (
-            <div>
 
-            </div>
+            <nav className="navbar navbar-dark bg-dark">
+                <a className="navbar-brand" href="/">Employee Management App</a>
+            </nav>
+
         )
     }
 }
